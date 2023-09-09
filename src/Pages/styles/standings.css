@@ -1,0 +1,38 @@
+*{
+    font-family: 'Noto Sans Chorasmian', sans-serif;
+}
+
+/* Header styling */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: left;
+    margin-bottom: 20px;
+    padding: 15px 10px 0 0; 
+  }
+/* styles/standings.css */  
+  #season-dropdown {
+    margin-top: 10px;
+    background-color: #0d0d0d;
+    border: #0d0d0d;
+  }
+
+  
+  /* Improved h1 styling */
+  h1 {
+    font-size: 2.5rem;
+    color: black;
+    margin: 0;
+    margin-bottom: 10px; /* Add margin below the title */
+    font-family: 'Noto Sans Chorasmian', sans-serif;
+    text-align: left;
+    /* font-family: 'Poppins', sans-serif;      */
+  }
+  
+  /* Team badge styling */
+  .team-badge {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  

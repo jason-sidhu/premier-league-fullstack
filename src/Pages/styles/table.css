@@ -1,0 +1,78 @@
+/* FplStatsPage.css */
+
+.stats-container {
+    margin: 20px auto; /* Center-align the container */
+    padding: 20px;
+    background-color: #f7f7f7;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .stats-table th,
+  .stats-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .stats-table th {
+    background-color: #333;
+    color: #fff;
+  }
+  
+  .stats-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .stats-table tbody tr:hover {
+    background-color: #ddd;
+  }
+  
+  .search-bar {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #007bff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s; 
+  }
+  
+  .search-bar:hover {
+    border-color: #0056b3; 
+  }
+
+
+  .filters-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* Adjust the spacing between filters */
+    align-items: center;
+    margin-bottom: 20px; /* Add some space between filters and table */
+  }
+  
+  .filter {
+    display: flex;
+    align-items: center;
+  }
+  
+  .filter label {
+    margin-right: 5px; /* Adjust the spacing between label and select */
+  }
+  
+  /* Style select elements if needed */
+  .filter select {
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }

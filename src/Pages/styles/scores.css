@@ -1,0 +1,88 @@
+.scores-container {
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .page-title {
+    margin-bottom: 20px;
+  }
+  
+  .dropdown-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+  }
+  
+  .scrollable-menu {
+    max-height: 30vh;
+    overflow-y: scroll;
+  }
+  
+  .dropdown-btn {
+    width: 150px;
+  }
+  
+  .match-card {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin: 15px 0;
+    transition: box-shadow 0.3s ease-in-out;
+    align-items: center;
+
+  }
+  
+  .match-card:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #cbcbcb;
+  }
+  
+  .team-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .team-crest {
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+  }
+  
+  .team-name {
+    margin: 0;
+    font-weight:bold;
+  }
+  
+  .score {
+    font-size: 24px;
+    margin: 0;
+  }
+  
+  .match-details {
+    font-style: italic;
+    margin: 10px 0;
+  }
+  
+  .venue {
+    font-size: 14px;
+    margin: 0;
+  }
+
+  .matchday-dropdown {
+    max-height: 1000px;
+    overflow-y:visible;
+  }
+
+  .error-message {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  /* grey #cbcbcb
+    dark grey #404040
+    dark blue #204d72
+    brown #98623e
+    black #000508
+  
+  
+  */
