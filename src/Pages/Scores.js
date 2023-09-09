@@ -111,7 +111,7 @@ function Scores() {
 
                   <Col >  
                     <img src={match.awayTeam.crest} alt={match.awayTeam.shortName} className="team-crest" />
-                    <p className="team-name">{match.awayTeam.name}</p>
+                    <p className="team-name">{match.awayTeam.shortName}</p>
                   </Col>
                 </Row>
 

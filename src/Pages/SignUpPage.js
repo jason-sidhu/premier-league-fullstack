@@ -24,22 +24,22 @@ function SignUpPage() {
     "Aston Villa",
     "Bournemouth",
     "Brentford",
-    "Brighton",
+    "Brighton Hove",
     "Burnley",
     "Chelsea",
     "Crystal Palace",
     "Everton",
     "Fulham",
     "Liverpool",
-    "Luton",
+    "Luton Town",
     "Man City",
-    "Man Utd",
+    "Man United",
     "Newcastle",
-    "Nottingham Forest",
+    "Nottingham",
     "Sheffield Utd",
     "Tottenham",
     "West Ham",
-    "Wolves",
+    "Wolverhampton",
   ];
 
   const togglePasswordVisibility = () => {
@@ -146,4 +146,3 @@ function SignUpPage() {
 }
 
 export default SignUpPage;
-

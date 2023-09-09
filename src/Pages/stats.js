@@ -43,7 +43,6 @@ function Stats() {
     20: "Wolves",
   };
 
-
   useEffect(() => {
     async function fetchStatistics() {
       try {
@@ -89,11 +88,11 @@ function Stats() {
     } else {
       // Need to handle cases where values cannot be converted to numbers
       // For example, if aValue or bValue is not a valid number
-      return 0; 
+      return 0;
     }
   });
 
-const filteredData = sortedData
+  const filteredData = sortedData
     .filter((player) => {
       const playerName = `${player.first_name} ${player.second_name}`;
       return playerName.toLowerCase().includes(searchText.toLowerCase());
@@ -102,8 +101,7 @@ const filteredData = sortedData
     .filter(
       (player) =>
         !selectedPosition || player.element_type === parseInt(selectedPosition)
-    )
-    
+    );
 
   const renderTableRows = () => {
     return filteredData.map((player) => (
@@ -135,7 +133,7 @@ const filteredData = sortedData
         className="search-bar"
       />
 
-<div className="filters-container">
+      <div className="filters-container">
         <div className="filter">
           <label htmlFor="teamFilter">Filter by Team: </label>
           <select
@@ -159,12 +157,13 @@ const filteredData = sortedData
             value={selectedPosition}
           >
             <option value="">All Positions</option>
-            {Object.entries(positionMapping).map(([positionNumber, position]) => (
-              <option key={positionNumber} value={positionNumber}>
-                {position}
-              </option>
-            ))}
-
+            {Object.entries(positionMapping).map(
+              ([positionNumber, position]) => (
+                <option key={positionNumber} value={positionNumber}>
+                  {position}
+                </option>
+              )
+            )}
           </select>
         </div>
       </div>
@@ -175,23 +174,31 @@ const filteredData = sortedData
             <th>Player Name</th>
             <th>Team</th>
             <th>Position</th>
-            <th>Goals Scored {" "}{<FaSort onClick={() => handleSort("goals_scored")} />}</th>
             <th>
-              Assists {" "}{<FaSort onClick={() => handleSort("assists")} />}
+              Goals Scored{" "}
+              {<FaSort onClick={() => handleSort("goals_scored")} />}
             </th>
+            <th>Assists {<FaSort onClick={() => handleSort("assists")} />}</th>
             <th>
               Yellow Cards{" "}
               {<FaSort onClick={() => handleSort("yellow_cards")} />}
             </th>
             <th>
-              Red Cards{" "}
-              {<FaSort onClick={() => handleSort("red_cards")} />}
+              Red Cards {<FaSort onClick={() => handleSort("red_cards")} />}
             </th>
-            <th> xG per 90 {<FaSort onClick={() => handleSort("expected_goals_per_90")} />}</th>
             <th>
-              xA per 90{<FaSort onClick={() => handleSort("expected_assists_per_90")} />}
+              {" "}
+              xG per 90{" "}
+              {<FaSort onClick={() => handleSort("expected_goals_per_90")} />}
             </th>
-            <th>Clean Sheets{<FaSort onClick={() => handleSort("clean_sheets")} />}</th>
+            <th>
+              xA per 90
+              {<FaSort onClick={() => handleSort("expected_assists_per_90")} />}
+            </th>
+            <th>
+              Clean Sheets
+              {<FaSort onClick={() => handleSort("clean_sheets")} />}
+            </th>
           </tr>
         </thead>
         <tbody>{renderTableRows()}</tbody>
