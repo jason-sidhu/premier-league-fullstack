@@ -33,15 +33,15 @@ root.render(
     <Router>
       <Routes>
         <Route path='' element={<Home/>} />
-        <Route path="/Pages/scores" element={<Scores />} />
-        <Route path="/Pages/standings" element={<Standings />} />
-        <Route path="/Pages/stats" element={<Stats />} />
-        <Route path="/Pages/fantasy" element={<Fantasy />} />
-        <Route path="/Pages/favourite" element={<Favourite />} />
-        <Route path="/sign-in-options" element={<SignInOptionsPage />} />
-        <Route path="/Pages/signin" element={<SignInPage/>} />
-        <Route path="/Pages/signup" element={<SignUpPage />} />
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path="Pages/scores" element={<Scores />} />
+        <Route path="Pages/standings" element={<Standings />} />
+        <Route path="Pages/stats" element={<Stats />} />
+        <Route path="Pages/fantasy" element={<Fantasy />} />
+        <Route path="Pages/favourite" element={<Favourite />} />
+        <Route path="sign-in-options" element={<SignInOptionsPage />} />
+        <Route path="Pages/signin" element={<SignInPage/>} />
+        <Route path="Pages/signup" element={<SignUpPage />} />
+        <Route path="profile" element={<Profile/>}/>
       </Routes>
     </Router>
   </React.StrictMode>
