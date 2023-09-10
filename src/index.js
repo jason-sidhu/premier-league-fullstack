@@ -32,7 +32,7 @@ root.render(
   </header>
     <Router>
       <Routes>
-        <Route path='' element={<Home/>} />
+        <Route path='/' element={<Home/>} />
         <Route path="Pages/scores" element={<Scores />} />
         <Route path="Pages/standings" element={<Standings />} />
         <Route path="Pages/stats" element={<Stats />} />
