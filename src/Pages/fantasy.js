@@ -242,7 +242,7 @@ function Fantasy() {
             <th>Form {<FaSort onClick={() => handleSort("form")} />}</th>
             <th>Current Price {<FaSort onClick={() => handleSort("now_cost")} />} </th>
             <th>Selected Percentage{<FaSort onClick={() => handleSort("selected_by_percent")} />} </th>
-            <th>Points Per Game{<FaSort onClick={() => handleSort("points_per_game")} />} </th>
+            <th>Points Per Game{<FaSort onClick={() => handleSort("points_per_game")} />}</th>
             <th>Total Points{<FaSort onClick={() => handleSort("total_points")} />} </th>
             <th>ICT {<FaSort onClick={() => handleSort("ict_index")} />} </th>
             <th>Influence {<FaSort onClick={() => handleSort("influence")} />} </th>

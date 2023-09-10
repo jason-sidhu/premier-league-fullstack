@@ -67,7 +67,7 @@ function Scores() {
   };
 
   return (
-    <Container className="scores-container">
+    <Container className="scores-container p-4 shadow">
     <div className="dropdown-container">
       <h1 className="page-title">Premier League Results and Fixtures</h1>
       <ButtonGroup>
@@ -95,7 +95,7 @@ function Scores() {
       ) : (
           <div>
             {matches.map((match) => (
-              <Container fluid className="match-card">
+              <Container fluid className="match-card p-3 shadow">
                 <Row key={match.id} >
 
                   <Col>

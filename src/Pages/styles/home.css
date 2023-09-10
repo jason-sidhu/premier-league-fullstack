@@ -1,13 +1,47 @@
+.home-page{
+  background-color: white;
+  color: black;
+}
+.home-page h1{
+  color: black;
+}
 .jumbotron {
-    padding: 10rem 1rem;
-    margin-bottom: 1rem;
+    padding: 8rem 1rem;
     background-color: #e9ecef;
-    border-radius: .3rem;
+    margin-bottom: 2rem;
   }
 
-  .upcoming-scores {
-    padding: 10rem 1rem;
-    margin-bottom: 2rem;
-    background-color: #e9ecef;
-    border-radius: .3rem;
+
+.custom-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+  background-color: #e9ecef; 
+}
+
+.custom-card-title{
+  font-size: 1.5rem; 
+  text-align: center;
+  margin-bottom: 20px;
+  color: black;
+}
+
+.custom-card p {
+  font-size: 1rem; 
+  text-align: left; 
+  color:black;
+}
+.card-container{
+  padding-bottom: 2rem;
+}
+
+@media (max-width: 768px) {
+  .custom-card {
+    margin-bottom: 20px;
   }
+}

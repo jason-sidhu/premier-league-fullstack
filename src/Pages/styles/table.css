@@ -40,15 +40,12 @@
     width: 100%;
     padding: 10px;
     margin-bottom: 20px;
-    border: 2px solid #007bff;
+    border: 2px solid;
     border-radius: 5px;
     font-size: 16px;
     transition: border-color 0.3s; 
   }
   
-  .search-bar:hover {
-    border-color: #0056b3; 
-  }
 
 
   .filters-container {

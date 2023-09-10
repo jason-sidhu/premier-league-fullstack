@@ -1,0 +1,16 @@
+.nav{
+    color: white;
+    background-color: #0d1117;
+    transition: color 0.3s, border-bottom-color 0.3s;
+}
+.nav-options{
+    color: white;
+    border-bottom: 1px solid #0d1117; 
+}
+
+.nav-options:hover {
+    color: #99fffc;
+    border-bottom: 1px solid #99fffc; 
+  }
+
+  

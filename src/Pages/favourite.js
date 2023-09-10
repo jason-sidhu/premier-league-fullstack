@@ -362,7 +362,7 @@ function Favourite() {
         )}
       </Container>
 
-      <Container className="scores-container">
+      <Container className="scores-container  p-4 shadow">
         <div className="dropdown-container">
           <h1 className="page-title">{team} Results and Fixtures</h1>
           <ButtonGroup>

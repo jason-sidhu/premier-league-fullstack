@@ -116,17 +116,17 @@ function SignUpPage() {
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>New Favorite Team</Form.Label>
+            <Form.Label>Select Favorite Team</Form.Label>
             <Form.Control
               as="select"
               name="newFavourite"
               onChange={(e) => setTeam(e.target.value)}
             >
               <option value="">Select a team...</option>
-              {premierLeagueTeams.map((team) => (
-                <option key={team} value={team}>
-                  {team}
-                </option>
+              {Object.entries(premierLeagueTeams).map(([teamNumber, teamName]) => (
+              <option key={teamNumber} value={teamNumber}>
+                {teamName}
+              </option>
               ))}
             </Form.Control>
           </Form.Group>

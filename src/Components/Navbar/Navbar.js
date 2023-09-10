@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import "./Navbar.css"
 
 function BSNavbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Track user authentication state to see if signed in or not, display accordingly 
@@ -29,22 +30,22 @@ function BSNavbar() {
   };
 
   return (
-    <Navbar bg="dark" data-bs-theme="dark">
+    <Navbar className="nav" >
       <Container>
-        <Navbar.Brand href="/">EPL Home</Navbar.Brand>
+        <Navbar.Brand className="nav-options" href="/">EPL Home</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link href="../../Pages/scores">Results</Nav.Link>
-          <Nav.Link href="../../Pages/standings">Standings</Nav.Link>
-          <Nav.Link href="../../Pages/stats">Statistics</Nav.Link>
-          <Nav.Link href="../../Pages/fantasy">Fantasy</Nav.Link>
-          <Nav.Link  href={isAuthenticated ? "../../Pages/favourite" : "/sign-in-options"}>Favourite</Nav.Link>
+          <Nav.Link className="nav-options" href="../../Pages/scores">Results</Nav.Link>
+          <Nav.Link className="nav-options" href="../../Pages/standings">Standings</Nav.Link>
+          <Nav.Link className="nav-options" href="../../Pages/stats">Statistics</Nav.Link>
+          <Nav.Link className="nav-options" href="../../Pages/fantasy">Fantasy</Nav.Link>
+          <Nav.Link className="nav-options" href={isAuthenticated ? "../../Pages/favourite" : "/sign-in-options"}>Favourite</Nav.Link>
         </Nav>
         <Nav>
-          <Nav.Link href={isAuthenticated ? "/profile" : "/sign-in-options" }>Profile</Nav.Link>
+          <Nav.Link className="nav-options" href={isAuthenticated ? "/profile" : "/sign-in-options" }>Profile</Nav.Link>
           <Nav.Link
             href={isAuthenticated ? "/" : "/sign-in-options"}
             onClick={isAuthenticated ? handleSignOutClick : null}
-            className={isAuthenticated ? "sign-out-animation" : ""}
+            className={isAuthenticated ? "sign-out-animation nav-options" : "nav-options"}
           >
             {isAuthenticated ? "Sign Out" : "Sign In"}
           </Nav.Link>

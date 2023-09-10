@@ -1,6 +1,7 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Container, Table, DropdownButton, Dropdown } from "react-bootstrap";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/standings.css";
 import "./styles/table.css"
@@ -58,7 +59,7 @@ function Standings() {
 
 
   return (
-    <Container className="stats-container">
+    <Container className="stats-container  p-4 shadow">
       <div className="header">
         <h1>Premier League Standings</h1>
         <DropdownButton id="season-dropdown" title={`Season ${selectedSeason}`} data-bs-theme="dark"  menuVariant="dark">
