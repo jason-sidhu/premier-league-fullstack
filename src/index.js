@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import {  Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Standings from './Pages/standings';
@@ -22,16 +22,11 @@ if(process.env.NODE_ENV === 'production') {disableReactDevTools()};
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-   <Helmet>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Chorasmian&family=Poppins:wght@100&display=swap" rel="stylesheet"/>
-    </Helmet>
   <header>
     <BSNavbar/>
   </header>
     <Router>
-      <Routes>
+      <Switch>
         <Route path='/' element={<Home />} />
         <Route path="/Pages/scores" element={<Scores />} />
         <Route path="Pages/standings" element={<Standings />} />
@@ -42,7 +37,7 @@ root.render(
         <Route path="Pages/signin" element={<SignInPage/>} />
         <Route path="Pages/signup" element={<SignUpPage />} />
         <Route path="profile" element={<Profile/>}/>
-      </Routes>
+      </Switch>
     </Router>
   </React.StrictMode>
 );
