@@ -34,16 +34,16 @@ function BSNavbar() {
       <Container>
         <Navbar.Brand className="nav-options" href="/">EPL Home</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link className="nav-options" href="../../Pages/scores">Results</Nav.Link>
-          <Nav.Link className="nav-options" href="../../Pages/standings">Standings</Nav.Link>
-          <Nav.Link className="nav-options" href="../../Pages/stats">Statistics</Nav.Link>
-          <Nav.Link className="nav-options" href="../../Pages/fantasy">Fantasy</Nav.Link>
-          <Nav.Link className="nav-options" href={isAuthenticated ? "../../Pages/favourite" : "/sign-in-options"}>Favourite</Nav.Link>
+          <Nav.Link className="nav-options" href="https://eplhub.onrender.com/Pages/scores">Results</Nav.Link>
+          <Nav.Link className="nav-options" href="https://eplhub.onrender.com/Pages/standings">Standings</Nav.Link>
+          <Nav.Link className="nav-options" href="https://eplhub.onrender.com/Pages/stats">Statistics</Nav.Link>
+          <Nav.Link className="nav-options" href="https://eplhub.onrender.com/Pages/fantasy">Fantasy</Nav.Link>
+          <Nav.Link className="nav-options" href={isAuthenticated ? "https://eplhub.onrender.com/Pages/favourite" : "https://eplhub.onrender.com/sign-in-options"}>Favourite</Nav.Link>
         </Nav>
         <Nav>
           <Nav.Link className="nav-options" href={isAuthenticated ? "/profile" : "/sign-in-options" }>Profile</Nav.Link>
           <Nav.Link
-            href={isAuthenticated ? "/" : "/sign-in-options"}
+            href={isAuthenticated ? "https://eplhub.onrender.com" : "https://eplhub.onrender.com/sign-in-options"}
             onClick={isAuthenticated ? handleSignOutClick : null}
             className={isAuthenticated ? "sign-out-animation nav-options" : "nav-options"}
           >
