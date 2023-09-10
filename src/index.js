@@ -32,16 +32,16 @@ root.render(
   </header>
     <Router>
       <Routes>
-        <Route path='' element={<Home/>} />
-        <Route path="/Pages/scores" element={<Scores />} />
-        <Route path="/Pages/standings" element={<Standings />} />
-        <Route path="/Pages/stats" element={<Stats />} />
-        <Route path="/Pages/fantasy" element={<Fantasy />} />
-        <Route path="/Pages/favourite" element={<Favourite />} />
-        <Route path="/sign-in-options" element={<SignInOptionsPage />} />
-        <Route path="/Pages/signin" element={<SignInPage/>} />
-        <Route path="/Pages/signup" element={<SignUpPage />} />
-        <Route path="/profile" element={<Profile/>}/>
+        <Route path='https://eplhub.onrender.com' element={<Home/>} />
+        <Route path="https://eplhub.onrender.com/Pages/scores" element={<Scores />} />
+        <Route path="https://eplhub.onrender.com/Pages/standings" element={<Standings />} />
+        <Route path="https://eplhub.onrender.com/Pages/stats" element={<Stats />} />
+        <Route path="https://eplhub.onrender.com/Pages/fantasy" element={<Fantasy />} />
+        <Route path="https://eplhub.onrender.com/Pages/favourite" element={<Favourite />} />
+        <Route path="https://eplhub.onrender.com/sign-in-options" element={<SignInOptionsPage />} />
+        <Route path="https://eplhub.onrender.com/Pages/signin" element={<SignInPage/>} />
+        <Route path="https://eplhub.onrender.com/Pages/signup" element={<SignUpPage />} />
+        <Route path="https://eplhub.onrender.com/profile" element={<Profile/>}/>
       </Routes>
     </Router>
   </React.StrictMode>
