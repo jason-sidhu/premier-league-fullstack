@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import {  Route, Switch, BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Standings from './Pages/standings';
@@ -26,7 +26,7 @@ root.render(
     <BSNavbar/>
   </header>
     <Router>
-      <Switch>
+      <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/Pages/scores" element={<Scores />} />
         <Route path="Pages/standings" element={<Standings />} />
@@ -37,7 +37,7 @@ root.render(
         <Route path="Pages/signin" element={<SignInPage/>} />
         <Route path="Pages/signup" element={<SignUpPage />} />
         <Route path="profile" element={<Profile/>}/>
-      </Switch>
+      </Routes>
     </Router>
   </React.StrictMode>
 );
