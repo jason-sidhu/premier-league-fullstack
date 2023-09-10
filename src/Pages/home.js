@@ -5,9 +5,9 @@ import "./styles/home.css";
 
 
 function Home() {
-
   const [isAuthenticated, setIsAuthenticated] = useState(false); 
   
+  // Check authentication and load info depending on this
   useEffect(() => {
     const userToken = localStorage.getItem("userToken");
     if (userToken) {
@@ -22,11 +22,7 @@ function Home() {
             <Container>
               <h1>Premier League Hub</h1>
               <p>Your one-stop destination for Premier League scores, updates, fantasy football, and statistics!</p>
-              <p>
-        {isAuthenticated
-          ? "Checkout the favorite tab to see information about your favorite team"
-          : "Sign in to have a customized experience with your favorite team"}
-      </p>
+              <p>{isAuthenticated ? "Checkout the favorite tab to see information about your favorite team" : "Sign in to have a customized experience with your favorite team"} </p>
             </Container>
           </div>
         </div>

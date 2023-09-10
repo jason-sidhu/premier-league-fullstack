@@ -2,21 +2,11 @@ import express, { Router } from "express";
 import axios from "axios";
 import dotenv from "dotenv"; 
 
-
 dotenv.config();
 const router = express.Router();
 const API_KEY = process.env.FOOTBALL_API_KEY
 
-
-router.route("/sportsmonk").get( async (req, res)=> {
-  try{
-    //general sportmonk url https://api.sportmonks.com/v3/football/
-  } catch(error){
-
-  }
-
-});
-
+// Results and fixtures api, use req data to make appropriate request to api endpoint
 router.route("/").get( async (req, res) => {
   try{
     const matchday = req.query.matchday || "1" ;
@@ -29,9 +19,8 @@ router.route("/").get( async (req, res) => {
   }
   );
 
-  console.log(response.data)
-  res.json(response.data);
-
+  console.log(response.data);
+  res.status(200).json(response.data);
   } catch(error){
     console.log("errors")
     res.status(500).json(error);

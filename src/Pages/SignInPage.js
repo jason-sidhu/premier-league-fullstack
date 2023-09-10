@@ -16,7 +16,6 @@ function SignInPage() {
 
     const handleSignIn = async (e) => {
         e.preventDefault(); 
-
         try{
             const response = await fetch("http://localhost:8800/api/signin", {
                 method: 'POST', 
@@ -39,7 +38,6 @@ function SignInPage() {
             console.error("Sign-in error:", error);
             setError("Internal Server Error");
         }
-
     }
 
   return (

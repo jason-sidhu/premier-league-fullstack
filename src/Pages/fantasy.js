@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/table.css";
 
 function Fantasy() {
-  const [fantasyData, setFantasyData] = useState([]);
+  const [fantasyData, setFantasyData] = useState([]); // Store fantasy data from api
   const [sortBy, setSortBy] = useState({
     key: "form",
     ascending: false,
@@ -13,7 +13,10 @@ function Fantasy() {
   const [selectedTeam, setSelectedTeam] = useState("");
   const [selectedPosition, setSelectedPosition] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  // Map position and team from api "id" to user appropriate data
   const positionMapping = {
     1: "GK",
     2: "Defender",
@@ -44,7 +47,7 @@ function Fantasy() {
     20: "Wolves",
   };
 
-  //cost returned incorrectly from API, fix to display properly
+  // Cost is returned incorrectly from API, fix to display properly ex, 100 => 10.0, 98 => 9.8
   const formatPrice = (rawPrice) => {
     const price = parseFloat(rawPrice);
     if (price < 10) {
@@ -55,30 +58,39 @@ function Fantasy() {
   };
 
   useEffect(() => {
-    async function fetchStatistics() {
-      try {
-        const response = await fetch(`http://localhost:8800/api/fantasy`);
+    fetchStatistics();
+  }, []);
+
+  const fetchStatistics = async () => {
+    try {
+      const response = await fetch(`http://localhost:8800/api/fantasy`);
+      if (response.status === 200) {
         const data = await response.json();
-        // Format the price data
+        // Format and store the player data, use spread syntax to clone each player object while overriding the cost property
         const formattedData = data.elements.map((player) => ({
           ...player,
           now_cost: formatPrice(player.now_cost),
         }));
         setFantasyData(formattedData);
-      } catch (error) {
-        console.error("Error fetching statistics:", error);
+      } else {
+        setError(response.message);
       }
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching statistics:", error);
+      setLoading(false);
+      setError(error.message);
     }
-
-    fetchStatistics();
-  }, []);
+  };
 
   const handleSort = (key) => {
+    // Check if same sorting key and change the ascending to opposite
     if (sortBy.key === key) {
       setSortBy({
         key,
         ascending: !sortBy.ascending,
       });
+      // If diff key to sort by, set the key and ascending
     } else {
       setSortBy({
         key,
@@ -87,10 +99,12 @@ function Fantasy() {
     }
   };
 
+  // For searching player
   const handleSearch = (e) => {
     setSearchText(e.target.value);
   };
 
+  // Sort the Fantasy data using the search key user wants to sort by and store in array, without changing original data array
   const sortedFantasyData = fantasyData.slice().sort((a, b) => {
     const aValue = parseFloat(a[sortBy.key]);
     const bValue = parseFloat(b[sortBy.key]);
@@ -103,11 +117,12 @@ function Fantasy() {
       }
     } else {
       // Need to handle cases where values cannot be converted to numbers
-      // For example, if aValue or bValue is not a valid number
-      return 0; // You can choose how to handle this case
+      // For example, if aValue or bValue is not a valid number, for now all cases are valid since only sorting numbers
+      return 0;
     }
   });
 
+  // Filter the sorted date based on the filters applied by user
   const filteredFantasyData = sortedFantasyData
     .filter((player) => {
       const playerName = `${player.first_name} ${player.second_name}`;
@@ -118,16 +133,13 @@ function Fantasy() {
       (player) =>
         !selectedPosition || player.element_type === parseInt(selectedPosition)
     )
-    .filter(
-      (player) => {
-        if (!selectedPrice) {
-          return true; // Show all players if no price filter is selected
-        } 
-        const playerCost = parseFloat(player.now_cost); 
-        return playerCost <= selectedPrice; 
+    .filter((player) => {
+      if (!selectedPrice) {
+        return true; // Show all players if no price filter is selected
       }
-        
-    );
+      const playerCost = parseFloat(player.now_cost);
+      return playerCost <= selectedPrice;
+    });
 
   const renderTableRows = () => {
     return filteredFantasyData.map((player) => (
@@ -187,12 +199,13 @@ function Fantasy() {
             value={selectedPosition}
           >
             <option value="">All Positions</option>
-            {Object.entries(positionMapping).map(([positionNumber, position]) => (
-              <option key={positionNumber} value={positionNumber}>
-                {position}
-              </option>
-            ))}
-
+            {Object.entries(positionMapping).map(
+              ([positionNumber, position]) => (
+                <option key={positionNumber} value={positionNumber}>
+                  {position}
+                </option>
+              )
+            )}
           </select>
         </div>
         <div className="filter">
@@ -227,40 +240,27 @@ function Fantasy() {
             <th>Team</th>
             <th>Position</th>
             <th>Form {<FaSort onClick={() => handleSort("form")} />}</th>
-            <th>
-              Current Price {<FaSort onClick={() => handleSort("now_cost")} />}
-            </th>
-            <th>
-              Selected Percentage{" "}
-              {<FaSort onClick={() => handleSort("selected_by_percent")} />}
-            </th>
-            <th>
-              Points Per Game{" "}
-              {<FaSort onClick={() => handleSort("points_per_game")} />}
-            </th>
-            <th>
-              Total Points{" "}
-              {<FaSort onClick={() => handleSort("total_points")} />}
-            </th>
-            <th>ICT {<FaSort onClick={() => handleSort("ict_index")} />}</th>
-            <th>
-              Influence {<FaSort onClick={() => handleSort("influence")} />}
-            </th>
-            <th>
-              Creativity {<FaSort onClick={() => handleSort("creativity")} />}
-            </th>
-            <th>Threat {<FaSort onClick={() => handleSort("threat")} />}</th>
-            <th>
-              GW Transfers In{" "}
-              {<FaSort onClick={() => handleSort("transfers_in_event")} />}
-            </th>
-            <th>
-              GW Transfers Out{" "}
-              {<FaSort onClick={() => handleSort("transfers_out_event")} />}
-            </th>
+            <th>Current Price {<FaSort onClick={() => handleSort("now_cost")} />} </th>
+            <th>Selected Percentage{<FaSort onClick={() => handleSort("selected_by_percent")} />} </th>
+            <th>Points Per Game{<FaSort onClick={() => handleSort("points_per_game")} />} </th>
+            <th>Total Points{<FaSort onClick={() => handleSort("total_points")} />} </th>
+            <th>ICT {<FaSort onClick={() => handleSort("ict_index")} />} </th>
+            <th>Influence {<FaSort onClick={() => handleSort("influence")} />} </th>
+            <th>Creativity {<FaSort onClick={() => handleSort("creativity")} />} </th>
+            <th>Threat {<FaSort onClick={() => handleSort("threat")} />} </th>
+            <th>GW Transfers In{<FaSort onClick={() => handleSort("transfers_in_event")} />} </th>
+            <th>GW Transfers Out{" "}{<FaSort onClick={() => handleSort("transfers_out_event")} />} </th>
           </tr>
         </thead>
-        <tbody>{renderTableRows()}</tbody>
+        <tbody>
+          {error ? (
+            <p className="error-message">{error}</p>
+          ) : loading ? (
+            <p>Loading...</p>
+          ) : (
+            renderTableRows()
+          )}
+        </tbody>
       </table>
     </div>
   );

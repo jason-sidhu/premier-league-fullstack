@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Container, Card, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// Page to choose sign in or sign up
 function SignInOptionsPage() {
   return (
     <Container className="mt-5" fluid>

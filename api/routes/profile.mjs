@@ -5,18 +5,19 @@ import bcrypt from "bcrypt";
 import dotenv from "dotenv";
 
 dotenv.config();
-
 const router = express.Router();
 const jwtSecretKey = process.env.JWTSECRET;
 
+//READ FROM DATABASE
 router.get("/", async (req, res) => {
+  //receive JWT 
   const token = req.headers.authorization;
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
   }
 
   try {
-    // Fetch user data from MongoDB
+    // Verify user (JWT) and extract userId to search Database for user information
     const decodedToken = jwt.verify(token.split(" ")[1], jwtSecretKey);
     const userId = decodedToken.userId;
 
@@ -24,7 +25,8 @@ router.get("/", async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-
+  
+    // Return relevant user information 
     const { username, email, team } = user;
     res.json({ username, email, team });
   } catch (error) {
@@ -33,7 +35,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-
+//UPDATE DATABASE
 router.put("/update", async (req, res) => {
   const token = req.headers.authorization;
 
@@ -44,15 +46,13 @@ router.put("/update", async (req, res) => {
   try {
     const decoded = jwt.verify(token.split(" ")[1], jwtSecretKey);
     const userId = decoded.userId;
-
-    // Fetch user data from MongoDB
     const user = await User.findById(userId);
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
-    // Check if the new username already exists
+    // Ensure username is not already in use 
     if (req.body.newUsername && req.body.newUsername !== user.username) {
       const existingUser = await User.findOne({
         username: req.body.newUsername,
@@ -65,7 +65,7 @@ router.put("/update", async (req, res) => {
       user.username = req.body.newUsername;
     }
 
-    // Check if the new email already exists
+    // Ensure email is not already in use 
     if (req.body.newEmail && req.body.newEmail !== user.email) {
       const existingUser = await User.findOne({ email: req.body.newEmail });
 
@@ -76,7 +76,7 @@ router.put("/update", async (req, res) => {
       user.email = req.body.newEmail;
     }
 
-    // Check if the current password matches the stored hashed password
+    // Check user password is valid to update info using bcrypt
     const isPasswordValid = await bcrypt.compare(
       req.body.currentPassword,
       user.password
@@ -88,7 +88,7 @@ router.put("/update", async (req, res) => {
       });
     }
 
-    // Update user information
+    // Update any user information that was changed
     if (req.body.newUsername) {
       user.username = req.body.newUsername;
     }
@@ -99,10 +99,9 @@ router.put("/update", async (req, res) => {
       user.team = req.body.newFavourite;
     }
     if (req.body.newPassword) {
-      const saltRounds = 10;
       const hashedPassword = await bcrypt.hash(
         req.body.newPassword,
-        saltRounds
+        10
       );
       user.password = hashedPassword;
     }
@@ -126,11 +125,9 @@ router.put("/update", async (req, res) => {
   }
 });
 
-
-
-
+//DELETE USER
 router.delete("/delete", async (req, res) => {
-    const { password } = req.body;
+    const {password} = req.body;
     const token = req.headers.authorization;
 
     if (!token) {
@@ -138,23 +135,19 @@ router.delete("/delete", async (req, res) => {
     }
   
     try {
-      // Fetch user data from MongoDB
       const decodedToken = jwt.verify(token.split(" ")[1], jwtSecretKey);
       const userId = decodedToken.userId;
-  
       const user = await User.findOne({ _id: userId });
   
-      // Verify the current password
+      // Verify password
       const isPasswordValid = await bcrypt.compare(password, user.password);
   
       if (!isPasswordValid) {
-        // If the password is incorrect, return an error
         return res.status(401).json({ message: "Incorrect password." });
       }
   
-      // If the password is correct, delete the user
+      // If the password is correct, delete user
       await User.findByIdAndDelete(userId);
-  
       res.status(200).json({ message: "User account deleted successfully." });
     } catch (error) {
       console.error("Error deleting user account:", error);

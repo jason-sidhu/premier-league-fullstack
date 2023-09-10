@@ -1,9 +1,7 @@
-// Front-End: src/components/FavoritePage.js
 import React from "react";
 import { useState, useEffect } from "react";
 import {
   Container,
-  Table,
   DropdownButton,
   Dropdown,
   Row,
@@ -15,16 +13,21 @@ import { FaSort } from "react-icons/fa";
 import "./styles/standings.css";
 import "./styles/table.css";
 
+// Lots of repeated code from other components
+// TODO: update other react components (Scores, Standings, Stats) so that we can reuse them here while providing the filter of fav team
 function Favourite() {
-  const [matchday, setMatchday] = useState("1"); // State for selected matchday
-  const [matches, setMatches] = useState([]); // State for match data
+  const [matchday, setMatchday] = useState("1");
+  const [matches, setMatches] = useState([]);
   const [standings, setStandings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSeason, setSelectedSeason] = useState(2023);
+  const [selectedSeason, setSelectedSeason] = useState(2023); // Diff stat for standings season and results season
   const [season, setSeason] = useState(2023);
   const [error, setError] = useState(null);
+  const [statsError, setStatsError] = useState(null);
+  const [tableError, setTableError] = useState(null);
   const [team, setTeam] = useState("");
   const [tableLoading, setTableLoading] = useState(true);
+  const [statsLoading, setStatsLoading] = useState(true);
   const [stats, setStats] = useState([]);
   const [sortBy, setSortBy] = useState({
     key: "goals_scored",
@@ -62,57 +65,117 @@ function Favourite() {
     19: "West Ham",
     20: "Wolverhampton",
   };
-
+  //--------USE EFFECTS -----------
+  // USER DATA & PLAYER STATS
   useEffect(() => {
-    // Fetch user data from the backend when the component mounts
     fetchUserData();
+    fetchStatistics();
   }, []);
 
-  useEffect(() => {
-    const cachedStandings = localStorage.getItem(
-      `${team}standings-${selectedSeason}`
-    );
-    //if data cached and not most recent season, use cached data
-    if (cachedStandings && selectedSeason !== 2023) {
-      setStandings(JSON.parse(cachedStandings));
-      setLoading(false);
-    } else {
-      fetchStandings(selectedSeason);
-    }
-  }, [selectedSeason]);
-
+  // RESULTS
   useEffect(() => {
     fetchMatches(season, matchday);
   }, [season, matchday]);
 
+  // STANDINGS
   useEffect(() => {
-    async function fetchStatistics() {
-      try {
-        const response = await fetch(`http://localhost:8800/api/fantasy`);
+    const cachedStandings = localStorage.getItem(
+      `${team}standings-${selectedSeason}`
+    );
+    // If data is cached and not the most recent season, use cached data
+    if (cachedStandings && selectedSeason !== 2023) {
+      setStandings(JSON.parse(cachedStandings));
+      setTableLoading(false);
+    } else {
+      fetchStandings(selectedSeason);
+    }
+  }, [selectedSeason]);
+  //--------USE EFFECTS -----------
+
+  //---------FETCH DATA FROM BACKEND-------
+  //FETCH THE PLAYER STATS
+  const fetchStatistics = async () => {
+    try {
+      const response = await fetch(`http://localhost:8800/api/fantasy`);
+      if (response.status === 200) {
         const data = await response.json();
         setStats(data.elements);
-      } catch (error) {
-        console.error("Error fetching statistics:", error);
+        setStatsLoading(false);
+      } else {
+        setStatsError(response.message);
       }
+      setStatsLoading(false);
+    } catch (error) {
+      console.error("Error fetching statistics:", error);
+      setStatsLoading(false);
+      setStatsError(error.message);
     }
+  };
+  //FETCH THE POSITION
+  const fetchStandings = async (season) => {
+    try {
+      const response = await fetch(
+        `http://localhost:8800/api/standings?season=${season}`
+      );
+      if (!response.ok) {
+        if (response.status === 500) {
+          setTableError(
+            "Too many Requests :( please wait a minute before refreshing to make a new request"
+          );
+        }
+      }
+      const data = await response.text();
+      const parsedData = JSON.parse(data);
+      setStandings(parsedData);
+      setTableLoading(false);
+      // Cache data
+      localStorage.setItem(
+        `${team}standings-${season}`,
+        JSON.stringify(parsedData)
+      );
+    } catch (error) {
+      console.error("Error fetching standings:", error.message);
+      setTableLoading(false);
+      setTableError(error.message);
+    }
+  };
 
-    fetchStatistics();
-  }, []);
+  //FETCH THE USER DATA
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch("http://localhost:8800/api/profile", {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
+        },
+      });
+
+      if (response.status === 200) {
+        const data = await response.json();
+        setTeam(data.team);
+      } else {
+        // Redirect to the sign-in page
+        window.location.href = "/sign-in-options";
+      }
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+    }
+  };
 
   //FETCH THE MATCHES
   const fetchMatches = async (season, matchday) => {
     try {
       setLoading(true);
-      const cachedData = localStorage.getItem(`scores-${season}-${matchday}`); //"key" for a season/matchday data to check if in cache already
+      const cachedData = localStorage.getItem(`scores-${season}-${matchday}`);
 
       if (cachedData) {
-        //if cached, get the data and use it
+        // If cached, get the data and use it
         const data = JSON.parse(cachedData);
         setMatches(data.matches);
         setError(null);
         setLoading(false);
       } else {
-        //else fetch with api and handle errors, also set the data in cache for next time
+        // Fetch with api and handle errors, also set the data in cache for next time
         const response = await fetch(
           `http://localhost:8800/api/scores?season=${season}&matchday=${matchday}`
         );
@@ -136,9 +199,9 @@ function Favourite() {
     }
   };
 
+  //------HELPERS AND FILTERS
   const displayMatchdays = () => {
     const matchdayItems = [];
-
     for (let i = 1; i <= 38; i++) {
       matchdayItems.push(
         <Dropdown.Item key={i} onClick={() => setMatchday(i.toString())}>
@@ -146,63 +209,10 @@ function Favourite() {
         </Dropdown.Item>
       );
     }
-
     return matchdayItems;
   };
 
-  //FETCH THE POSITION
-  const fetchStandings = async (season) => {
-    try {
-      const response = await fetch(
-        `http://localhost:8800/api/standings?season=${season}`
-      );
-      if (!response.ok) {
-        if (response.status === 500) {
-          throw new Error(
-            "Too many Requests :( please wait a minute before refreshing to make a new request"
-          );
-        }
-      }
-      const data = await response.text(); // Log the raw JSON string
-      const parsedData = JSON.parse(data);
-
-      setStandings(parsedData);
-      setTableLoading(false);
-      //cache data
-      localStorage.setItem(
-        `${team}standings-${season}`,
-        JSON.stringify(parsedData)
-      );
-    } catch (error) {
-      console.error("Error fetching standings:", error.message);
-      setTableLoading(false);
-      setError(error.message);
-    }
-  };
-
-  //FETCH THE USER DATA
-  const fetchUserData = async () => {
-    try {
-      const response = await fetch("http://localhost:8800/api/profile", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("userToken")}`,
-        },
-      });
-
-      if (response.status === 200) {
-        const data = await response.json();
-        setTeam(data.team);
-      } else {
-        // Handle unauthorized or other errors
-        // Redirect to the sign-in page or show an error message
-        window.location.href = "/sign-in-options";
-      }
-    } catch (error) {
-      console.error("Error fetching user data:", error);
-    }
-  };
-
+  // FILTER STANDINGS
   const filterStandingsForFavouriteTeam = (standings) => {
     return standings[0]?.table.filter(
       (teamData) => teamData.team.shortName === team
@@ -218,6 +228,7 @@ function Favourite() {
     );
   };
 
+  // FILTER FOR SORTING
   const handleSort = (key) => {
     if (sortBy.key === key) {
       setSortBy({
@@ -248,7 +259,7 @@ function Favourite() {
       }
     } else {
       // Need to handle cases where values cannot be converted to numbers
-      // For example, if aValue or bValue is not a valid number
+      // For example, if aValue or bValue is not a valid number, for now all cases are valid since only sorting numbers
       return 0;
     }
   });
@@ -263,10 +274,9 @@ function Favourite() {
         !selectedPosition || player.element_type === parseInt(selectedPosition)
     );
 
-    const filteredDataForTeam = filteredData.filter(
-      (player) => teamMapping[player.team] === team
-    );
-    
+  const filteredDataForTeam = filteredData.filter(
+    (player) => teamMapping[player.team] === team
+  );
 
   const renderTableRows = () => {
     return filteredDataForTeam.map((player) => (
@@ -299,22 +309,14 @@ function Favourite() {
             data-bs-theme="dark"
             menuVariant="dark"
           >
-            <Dropdown.Item onClick={() => setSelectedSeason("2023")}>
-              2023/24
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setSelectedSeason("2022")}>
-              2022/23
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setSelectedSeason("2021")}>
-              2021/22
-            </Dropdown.Item>
-            <Dropdown.Item onClick={() => setSelectedSeason("2020")}>
-              2020/21
-            </Dropdown.Item>
+            <Dropdown.Item onClick={() => setSelectedSeason("2023")}>2023/24</Dropdown.Item>
+            <Dropdown.Item onClick={() => setSelectedSeason("2022")}>2022/23</Dropdown.Item>
+            <Dropdown.Item onClick={() => setSelectedSeason("2021")}>2021/22</Dropdown.Item>
+            <Dropdown.Item onClick={() => setSelectedSeason("2020")}>2020/21</Dropdown.Item>
           </DropdownButton>
         </div>
-        {error ? (
-          <p className="error-message">{error}</p>
+        {tableError ? (
+          <p className="error-message">{tableError}</p>
         ) : tableLoading ? (
           <p>Loading...</p>
         ) : (
@@ -387,31 +389,21 @@ function Favourite() {
               data-bs-theme="dark"
               menuVariant="dark"
             >
-              <Dropdown.Item onClick={() => setSeason("2023")}>
-                2023/24
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setSeason("2022")}>
-                2022/23
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setSeason("2021")}>
-                2021/22
-              </Dropdown.Item>
-              <Dropdown.Item onClick={() => setSeason("2020")}>
-                2020/21
-              </Dropdown.Item>
+              <Dropdown.Item onClick={() => setSeason("2023")}>2023/24</Dropdown.Item>
+              <Dropdown.Item onClick={() => setSeason("2022")}>2022/23</Dropdown.Item>
+              <Dropdown.Item onClick={() => setSeason("2021")}>2021/22</Dropdown.Item>
+              <Dropdown.Item onClick={() => setSeason("2020")}>2020/21</Dropdown.Item>
             </DropdownButton>
           </ButtonGroup>
         </div>
 
         <div>
-          {/* if error display error, if loading display loading*/}
           {error ? (
             <p className="error-message">{error}</p>
           ) : loading ? (
             <p>Loading...</p>
           ) : (
             <div>
-              {/* iterate over every match in matches array and use the anon function to display */}
               {filterScoresForFavouriteTeam().map((match, index) => (
                 <Container fluid className="match-card" key={index}>
                   <Row key={match.id}>
@@ -425,11 +417,7 @@ function Favourite() {
                     </Col>
 
                     <Col md="auto">
-                      <p className="score">
-                        {" "}
-                        {match.score.fullTime.home} -{" "}
-                        {match.score.fullTime.away}
-                      </p>
+                      <p className="score"> {" "}{match.score.fullTime.home} -{" "}{match.score.fullTime.away}</p>
                     </Col>
 
                     <Col>
@@ -465,72 +453,59 @@ function Favourite() {
       </Container>
 
       <Container>
-      <div className="stats-container">
-      <h1>2023/24 {team} Premier League Statistics</h1>
-      <input
-        type="text"
-        placeholder="Search Player"
-        value={searchText}
-        onChange={handleSearch}
-        className="search-bar"
-      />
+        <div className="stats-container">
+          <h1>2023/24 {team} Premier League Statistics</h1>
+          <input
+            type="text"
+            placeholder="Search Player"
+            value={searchText}
+            onChange={handleSearch}
+            className="search-bar"
+          />
 
-      <div className="filters-container">
-        <div className="filter">
-          <label htmlFor="positionFilter">Position</label>
-          <select
-            id="positionFilter"
-            onChange={(e) => setSelectedPosition(e.target.value)}
-            value={selectedPosition}
-          >
-            <option value="">All Positions</option>
-            {Object.entries(positionMapping).map(
-              ([positionNumber, position]) => (
-                <option key={positionNumber} value={positionNumber}>
-                  {position}
-                </option>
-              )
-            )}
-          </select>
+          <div className="filters-container">
+            <div className="filter">
+              <label htmlFor="positionFilter">Position</label>
+              <select
+                id="positionFilter"
+                onChange={(e) => setSelectedPosition(e.target.value)}
+                value={selectedPosition}
+              >
+                <option value="">All Positions</option>
+                {Object.entries(positionMapping).map(
+                  ([positionNumber, position]) => (
+                    <option key={positionNumber} value={positionNumber}>
+                      {position}
+                    </option>
+                  )
+                )}
+              </select>
+            </div>
+          </div>
+          {statsError ? (
+            <p className="error-message">{statsError}</p>
+          ) : statsLoading ? (
+            <p>Loading...</p>
+          ) : (
+            <table className="stats-table">
+              <thead>
+                <tr>
+                  <th>Player Name</th>
+                  <th>Team</th>
+                  <th>Position</th>
+                  <th> Goals Scored{<FaSort onClick={() => handleSort("goals_scored")} />} </th>
+                  <th> Assists{<FaSort onClick={() => handleSort("assists")} />} </th>
+                  <th> Yellow Cards{<FaSort onClick={() => handleSort("yellow_cards")} />} </th>
+                  <th> Red Cards{<FaSort onClick={() => handleSort("red_cards")} />} </th>
+                  <th> xG per 90{<FaSort onClick={() => handleSort("expected_goals_per_90")}/>} </th>
+                  <th> xA per 90{<FaSort onClick={() => handleSort("expected_assists_per_90")}/>} </th>
+                  <th> Clean Sheets{<FaSort onClick={() => handleSort("clean_sheets")}/>} </th>
+                </tr>
+              </thead>
+              <tbody>{renderTableRows()}</tbody>
+            </table>
+          )}
         </div>
-      </div>
-
-      <table className="stats-table">
-        <thead>
-          <tr>
-            <th>Player Name</th>
-            <th>Team</th>
-            <th>Position</th>
-            <th>
-              Goals Scored{" "}
-              {<FaSort onClick={() => handleSort("goals_scored")} />}
-            </th>
-            <th>Assists {<FaSort onClick={() => handleSort("assists")} />}</th>
-            <th>
-              Yellow Cards{" "}
-              {<FaSort onClick={() => handleSort("yellow_cards")} />}
-            </th>
-            <th>
-              Red Cards {<FaSort onClick={() => handleSort("red_cards")} />}
-            </th>
-            <th>
-              {" "}
-              xG per 90{" "}
-              {<FaSort onClick={() => handleSort("expected_goals_per_90")} />}
-            </th>
-            <th>
-              xA per 90
-              {<FaSort onClick={() => handleSort("expected_assists_per_90")} />}
-            </th>
-            <th>
-              Clean Sheets
-              {<FaSort onClick={() => handleSort("clean_sheets")} />}
-            </th>
-          </tr>
-        </thead>
-        <tbody>{renderTableRows()}</tbody>
-      </table>
-    </div>
       </Container>
     </div>
   );

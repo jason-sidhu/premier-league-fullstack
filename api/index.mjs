@@ -4,7 +4,6 @@ import dotenv from "dotenv";
 import mongoose from "mongoose";
 import signinRoute from "./routes/signin.mjs";
 import signupRoute from "./routes/signup.mjs"
-import bettingRoute from "./routes/betting.mjs";
 import fantasyRoute from "./routes/fantasy.mjs";
 import statsRoute from "./routes/stats.mjs";
 import profileRoute from "./routes/profile.mjs";
@@ -24,7 +23,6 @@ app.use(express.json())
 
 app.use("/api/signin", signinRoute);
 app.use("/api/signup", signupRoute)
-app.use("/api/betting", bettingRoute);
 app.use("/api/fantasy", fantasyRoute);
 app.use("/api/stats", statsRoute);
 app.use("/api/profile", profileRoute);

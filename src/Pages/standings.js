@@ -1,7 +1,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Container, Table, DropdownButton, Dropdown } from "react-bootstrap";
-import { Helmet } from "react-helmet";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/standings.css";
 import "./styles/table.css"
@@ -9,13 +8,13 @@ import "./styles/table.css"
 function Standings() {
   const [standings, setStandings] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedSeason, setSelectedSeason] = useState(2023); // State to store selected season
+  const [selectedSeason, setSelectedSeason] = useState(2023);
   const [error, setError] = useState(null);
 
   //------------on change to season------------
   useEffect(() => {
     const cachedStandings = localStorage.getItem(`standings-${selectedSeason}`);
-    //if data cached and not most recent season, use cached data 
+    // If data cached and not most recent season, use cached data 
     if (cachedStandings && (selectedSeason !== 2023)) {
       setStandings(JSON.parse(cachedStandings));
       setLoading(false);
@@ -32,7 +31,9 @@ function Standings() {
       const response = await fetch(`http://localhost:8800/api/standings?season=${season}`);
       if(!response.ok){
         if(response.status === 500) {
-          throw new Error("Too many Requests :( please wait a minute before refreshing to make a new request")
+          setError(
+            "Too many Requests :( please wait a minute before refreshing to make a new request"
+          );
         }
       }
       const data = await response.text(); // Log the raw JSON string
@@ -41,7 +42,7 @@ function Standings() {
 
       setStandings(parsedData);
       setLoading(false);
-      //cache data
+      // Cache data
       localStorage.setItem(`standings-${season}`, JSON.stringify(parsedData));
     } catch (error) {
       console.error("Error fetching standings:", error.message);
@@ -58,11 +59,6 @@ function Standings() {
 
   return (
     <Container className="stats-container">
-      <Helmet>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Chorasmian&family=Poppins:wght@100&display=swap" rel="stylesheet"/>
-      </Helmet>
       <div className="header">
         <h1>Premier League Standings</h1>
         <DropdownButton id="season-dropdown" title={`Season ${selectedSeason}`} data-bs-theme="dark"  menuVariant="dark">

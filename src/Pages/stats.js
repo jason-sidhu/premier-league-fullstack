@@ -12,6 +12,8 @@ function Stats() {
   const [searchText, setSearchText] = useState("");
   const [selectedTeam, setSelectedTeam] = useState("");
   const [selectedPosition, setSelectedPosition] = useState("");
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   const positionMapping = {
     1: "GK",
@@ -44,19 +46,28 @@ function Stats() {
   };
 
   useEffect(() => {
-    async function fetchStatistics() {
-      try {
-        const response = await fetch(`http://localhost:8800/api/fantasy`);
-        const data = await response.json();
-        setStats(data.elements);
-      } catch (error) {
-        console.error("Error fetching statistics:", error);
-      }
-    }
-
     fetchStatistics();
   }, []);
 
+  const fetchStatistics = async () => {
+    try {
+      const response = await fetch(`http://localhost:8800/api/fantasy`);
+      if (response.status === 200){
+        const data = await response.json();
+        setStats(data.elements);
+        setLoading(false)
+      } else {
+        setError(response.message);
+      }
+      setLoading(false);
+    } catch (error) {
+      console.error("Error fetching statistics:", error);
+      setLoading(false);
+      setError(error.message);
+    }
+  };
+
+  
   const handleSort = (key) => {
     if (sortBy.key === key) {
       setSortBy({
@@ -87,7 +98,7 @@ function Stats() {
       }
     } else {
       // Need to handle cases where values cannot be converted to numbers
-      // For example, if aValue or bValue is not a valid number
+      // For example, if aValue or bValue is not a valid number, for now all cases are valid since only sorting numbers
       return 0;
     }
   });
@@ -174,34 +185,24 @@ function Stats() {
             <th>Player Name</th>
             <th>Team</th>
             <th>Position</th>
-            <th>
-              Goals Scored{" "}
-              {<FaSort onClick={() => handleSort("goals_scored")} />}
-            </th>
-            <th>Assists {<FaSort onClick={() => handleSort("assists")} />}</th>
-            <th>
-              Yellow Cards{" "}
-              {<FaSort onClick={() => handleSort("yellow_cards")} />}
-            </th>
-            <th>
-              Red Cards {<FaSort onClick={() => handleSort("red_cards")} />}
-            </th>
-            <th>
-              {" "}
-              xG per 90{" "}
-              {<FaSort onClick={() => handleSort("expected_goals_per_90")} />}
-            </th>
-            <th>
-              xA per 90
-              {<FaSort onClick={() => handleSort("expected_assists_per_90")} />}
-            </th>
-            <th>
-              Clean Sheets
-              {<FaSort onClick={() => handleSort("clean_sheets")} />}
-            </th>
+            <th>Goals Scored{<FaSort onClick={() => handleSort("goals_scored")} />} </th>
+            <th>Assists {<FaSort onClick={() => handleSort("assists")} /> } </th>
+            <th>Yellow Cards {<FaSort onClick={() => handleSort("yellow_cards")} />}</th>
+            <th>Red Cards {<FaSort onClick={() => handleSort("red_cards")} />} </th>
+            <th>xG per 90{<FaSort onClick={() => handleSort("expected_goals_per_90")} />} </th>
+            <th>xA per 90{<FaSort onClick={() => handleSort("expected_assists_per_90")} />} </th>
+            <th>Clean Sheets{<FaSort onClick={() => handleSort("clean_sheets")} />} </th>
           </tr>
         </thead>
-        <tbody>{renderTableRows()}</tbody>
+        <tbody>
+          {error ? (
+            <p className="error-message">{error}</p>
+          ) : loading ? (
+            <p>Loading...</p>
+          ) : (
+            renderTableRows()
+          )}
+        </tbody>
       </table>
     </div>
   );

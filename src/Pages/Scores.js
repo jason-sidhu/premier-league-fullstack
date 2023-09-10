@@ -3,35 +3,36 @@ import { Container, DropdownButton, Dropdown, Card, Row, Col, Button, ButtonGrou
 import "./styles/scores.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+// first page made, too many comments...
 function Scores() {
-  const [matchday, setMatchday] = useState("1"); // State for selected matchday
-  const [season, setSeason] = useState("2023"); // State for selected season
-  const [matches, setMatches] = useState([]); // State for match data
-  const [loading, setLoading] = useState(true); //state for loading data from API 
-  const [error, setError] = useState(null); //state for error
+  const [matchday, setMatchday] = useState("1"); 
+  const [season, setSeason] = useState("2023"); 
+  const [matches, setMatches] = useState([]); 
+  const [loading, setLoading] = useState(true); 
+  const [error, setError] = useState(null); 
 
-  //useEffect to do something after render and change to our dependency array [season, matchday] (fetch data)
+  // useEffect to do something after render and change to our dependency array [season, matchday] (fetch data)
   useEffect(() => {
     fetchMatches(season, matchday);
   }, [season, matchday]);
 
   /* ------ API Call fetch data ------- */ 
-  //async function (fetchmatches), with two parameters, arrow function syntax. async function so rest of application is not blocked waiting for api response
-  //using await so our async function pauses code execution until promise is resolved and we receive our response from api
+  // Async function (fetchmatches), with two parameters, arrow function syntax. async function so rest of application is not blocked waiting for api response
+  // Using await so our async function pauses code execution until promise is resolved and we receive our response from api
   const fetchMatches = async (season, matchday) => {
     try {
     
       setLoading(true);
-      const cachedData = localStorage.getItem(`scores-${season}-${matchday}`); //"key" for a season/matchday data to check if in cache already
+      const cachedData = localStorage.getItem(`scores-${season}-${matchday}`); // "key" for a season/matchday data to check if in cache already
       
       if (cachedData && (season !== 2023)) {
-        //if cached, get the data and use it 
+        // If cached, get the data and use it 
         const data = JSON.parse(cachedData);
         setMatches(data.matches);
         setError(null);
         setLoading(false);
       } else {
-        //else fetch with api and handle errors, also set the data in cache for next time
+        // Else fetch with api and handle errors, also set the data in cache for next time
         const response = await fetch(`http://localhost:8800/api/scores?season=${season}&matchday=${matchday}`);
         if (response.status === 500) {
           setError("Too Many Requests. Please try again later.");
@@ -49,7 +50,6 @@ function Scores() {
       setError(error.message);
     }
   };
-
 
   //to not write out 38 drop down items
   const displayMatchdays = () => {
@@ -88,14 +88,12 @@ function Scores() {
       </div>
 
       <div>
-      {/* if error display error, if loading display loading*/}
       {error ? (
         <p className="error-message">{error}</p>
       ) : loading ? (
         <p>Loading...</p>
       ) : (
           <div>
-          {/* iterate over every match in matches array and use the anon function to display */}
             {matches.map((match) => (
               <Container fluid className="match-card">
                 <Row key={match.id} >
@@ -130,7 +128,6 @@ function Scores() {
                   <p className="venue">{match.venue}</p>
                   </Col>
                 </Row>
-                
               </Container>
             ))}
           </div>

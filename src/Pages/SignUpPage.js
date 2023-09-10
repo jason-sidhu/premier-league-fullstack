@@ -5,7 +5,6 @@ import {
   Form,
   Button,
   InputGroup,
-  Dropdown,
 } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -64,7 +63,7 @@ function SignUpPage() {
         localStorage.setItem("userToken", data.token); // Store the token in local storage to authenticate sign in later
         window.location.href = "/";
       } else {
-        // Registration failed, handle error
+        // Registration failed
         const data = await response.json();
         setError(data.message);
       }

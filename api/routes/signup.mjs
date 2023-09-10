@@ -4,14 +4,13 @@ import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
 dotenv.config();
-
 const router = express.Router();
 const jwtSecretKey = process.env.JWTSECRET
 
-// Register a new user
+// Sign up route
 router.post("/", async (req, res) => {
   try {
-    // Check if the email or username already exists
+    // Check if either email or username exists
     const existingUser = await User.findOne({
       $or: [{ email: req.body.email }, { username: req.body.username }],
     });
@@ -19,7 +18,7 @@ router.post("/", async (req, res) => {
       return res.status(400).json({ message: "User already exists" });
     }
 
-    // Create a new user
+    // Create and save new user with User model
     const user = new User(req.body);
     await user.save();
 

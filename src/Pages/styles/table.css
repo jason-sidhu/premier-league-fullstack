@@ -1,7 +1,5 @@
-/* FplStatsPage.css */
-
 .stats-container {
-    margin: 20px auto; /* Center-align the container */
+    margin: 20px auto; 
     padding: 20px;
     background-color: #f7f7f7;
     border: 1px solid #ddd;
@@ -56,9 +54,9 @@
   .filters-container {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px; /* Adjust the spacing between filters */
+    gap: 10px;
     align-items: center;
-    margin-bottom: 20px; /* Add some space between filters and table */
+    margin-bottom: 20px;
   }
   
   .filter {
@@ -67,10 +65,10 @@
   }
   
   .filter label {
-    margin-right: 5px; /* Adjust the spacing between label and select */
+    margin-right: 5px;
   }
   
-  /* Style select elements if needed */
+
   .filter select {
     padding: 5px;
     border: 1px solid #ccc;

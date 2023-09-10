@@ -13,11 +13,13 @@ import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 function Profile() {
+  // Existing user data
   const [userData, setUserData] = useState({
     username: "",
     email: "",
     favoriteTeam: "",
   });
+  // Data to update
   const [formValues, setFormValues] = useState({
     newUsername: "",
     newEmail: "",
@@ -59,7 +61,6 @@ function Profile() {
   };
 
   useEffect(() => {
-    // Fetch user data from the backend when the component mounts
     fetchUserData();
   }, []);
 
@@ -76,8 +77,7 @@ function Profile() {
         const data = await response.json();
         setUserData(data);
       } else {
-        // Handle unauthorized or other errors
-        // Redirect to the sign-in page or show an error message
+        // Redirect to the sign-in page
         window.location.href = "/sign-in-options";
       }
     } catch (error) {
@@ -87,6 +87,7 @@ function Profile() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    // Use spread syntax and only change the updated info
     setFormValues({
       ...formValues,
       [name]: value,
@@ -113,8 +114,8 @@ function Profile() {
       });
 
       if (response.status === 200) {
-        // Successfully updated user information
-        fetchUserData(); // Fetch updated user data
+        // Successfully updated user information, reset form and fetch the data to display again
+        fetchUserData();
         setFormValues({
           newUsername: "",
           newEmail: "",
@@ -125,7 +126,6 @@ function Profile() {
         setSuccessMessage("Information Updated Successfully");
         setError("");
       } else {
-        // Handle error response
         const data = await response.json();
         setError(data.message);
         setSuccessMessage("");
@@ -150,12 +150,9 @@ function Profile() {
       });
 
       if (response.status === 200) {
-        // Successfully deleted the user account
-        // Redirect to the main page or perform any other necessary actions
-        localStorage.setItem("userToken", ""); 
+        localStorage.setItem("userToken", "");
         window.location.href = "/sign-in-options";
       } else {
-        // Handle error response
         const data = await response.json();
         setSuccessMessage("");
         setError(data.message);
@@ -170,7 +167,19 @@ function Profile() {
       <Row className="justify-content-center">
         <Col sm={8} md={6} lg={4}>
           <Card className="p-4 shadow">
-            <h2 className="text-center mb-4">Profile</h2>
+            <div>
+              <h2 className="text-center mb-4">Profile</h2>
+              {successMessage && (
+                <div className="alert alert-success mt-4" role="alert">
+                  {successMessage}
+                </div>
+              )}
+              {error && (
+                <div className="alert alert-danger mt-4" role="alert">
+                  {error}
+                </div>
+              )}
+            </div>
             <div className="mb-3">
               <strong>Username:</strong> {userData.username}
             </div>
@@ -181,7 +190,6 @@ function Profile() {
               <strong>Favorite Team:</strong> {userData.team}
             </div>
 
-            {/* User Information Update Form */}
             <Form className="mt-4" onSubmit={handleSubmit}>
               <Form.Group className="mb-3">
                 <Form.Label>Update Username</Form.Label>
@@ -271,7 +279,6 @@ function Profile() {
                 </Col>
               </Row>
 
-              {/* Delete Account Confirmation Modal */}
               <Modal
                 show={showDeleteModal}
                 onHide={() => setShowDeleteModal(false)}
@@ -282,7 +289,7 @@ function Profile() {
                 <Modal.Body>
                   <p>Are you sure you want to delete your account?</p>
                   <Form.Group className="mb-3">
-                  <Form.Label>Enter Your Password to Confirm</Form.Label>
+                    <Form.Label>Enter Your Password to Confirm</Form.Label>
                     <InputGroup>
                       <Form.Control
                         type={showPassword ? "text" : "password"}
@@ -302,16 +309,6 @@ function Profile() {
                   </Button>
                 </Modal.Body>
               </Modal>
-              {successMessage && (
-                <div className="alert alert-success mt-4" role="alert">
-                  {successMessage}
-                </div>
-              )}
-              {error && (
-                <div className="alert alert-danger mt-4" role="alert">
-                  {error}
-                </div>
-              )}
             </Form>
           </Card>
         </Col>

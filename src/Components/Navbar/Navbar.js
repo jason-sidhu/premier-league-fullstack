@@ -4,7 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 function BSNavbar() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track user authentication state
+  const [isAuthenticated, setIsAuthenticated] = useState(false); // Track user authentication state to see if signed in or not, display accordingly 
 
   // Check if user is authenticated
   useEffect(() => {
