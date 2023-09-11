@@ -34,13 +34,13 @@ My name is Jason Sidhu and I am the developer behind Premier League Hub. As a pa
 
 Premier League Hub is built with a variety of cutting-edge technologies, including:
 
-- **Node.js:** For server-side scripting.
+- **Node.js:** For server-side development.
 - **Express.js:** As the web application framework.
 - **React:** For building the user interface.
-- **MongoDB and Mongoose:** As the database system for storing data.
+- **MongoDB and Mongoose:** As the database system for storing data. Mongoose schema to make a user model to store the user information. 
 - **JSON Web Tokens (JWT):** For secure user authentication.
 - **Bootstrap:** For responsive and stylish UI components.
-- **And More:** Bcrypt for password encryption,and using a caching mechanism to optimize API calls and reduce repeated API requests
+- **And More:** Bcrypt for password encryption,and using a caching mechanism to optimize API calls and reduce repeated API requests, middleware functions to handle tasks like JSON data parsing and Cross-Origin Resource Sharing (CORS), Axios to make HTTP requests to API endpoints for data, use of async functions and environment variables to follow best practices
 
 ## Getting Started
 Check out the website hosted using render here https://eplhub.onrender.com  
