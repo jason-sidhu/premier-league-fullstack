@@ -1,30 +1,41 @@
-AVAILABLE NOW:
-Premier League Hub provides you with up-to-date scores, fixtures, player statistics, standings, and data from your favorite team. The Fantasy section will help you manage your Fantasy Premier League team efficiently, providing valuable insights into key player performance attributes.
+# Premier League Hub
 
-You can filter your search to find results and standings from specific seasons and matchdays, and filter your fantasy or Premier League player statistics by a number of different attributes.
+Welcome to Premier League Hub, your go-to application for everything related to the English Premier League (EPL). This web app provides a comprehensive set of features for football enthusiasts, including live scores, standings, statistics, and fantasy football management.
 
-Once you have signed in, you can view data specific to your favorite team under the Favourite tab. See your favorite team's position, fixtures, and player statistics all in one place.
+## Table of Contents
 
-COMING SOON:
-Premier League Hub is a work in progress and is working hard to bring you more features and a better user experience.
+- [Features](#features)
+- [Upcoming Features](#upcoming-features)
+- [About the Author](#about-the-author)
+- [Technologies Used](#technologies-used)
+- [Getting Started](#getting-started)
 
-Upgrades will be made to the current APIs that are being used to offer a more tailored and enriched user experience. In particular, there is lots of focus on the development of a more personalized Fantasy Premier League page, and a new Fantasy Premier League game. Here is a preview of some of the things we want to bring soon:
+## Features
 
-Pre-match statistics and lineups
-Live match pages with in-game statistics and updates
-A Fantasy Premier League game with a unique scoring system for a better fantasy experience
-Live betting odds and predictions
+- **Live Scores:** Get real-time updates on EPL match scores and events.
+- **Standings:** View the latest league standings, including points, wins, losses, and goal differences.
+- **Statistics:** Access in-depth statistics on teams, players, and matches.
+- **Fantasy Football:** Manage your own fantasy football team, make transfers, and compete with other users.
+- **User Profiles:** Create and customize your user profile to keep track of your favorite teams and players.
+- **Authentication:** Secure user authentication using JWT (JSON Web Tokens).
 
-ABOUT ME
-My name is Jason Sidhu, a computer engineering student at the University of Waterloo and the creator of Premier League Hub.
+## About the Author
 
-As a football fan, I wanted to create something that I felt passionate about while testing my skills in creating a full-stack web application. I wanted to create a platform that offers everything a Premier League fan could want in one place.
+My name is Jason Sidhu and I am the developer behind Premier League Hub. As a passionate football fan and computer engineering student at the university of waterloo, I created this app to provide a one-stop platform for EPL enthusiasts. I'm committed to delivering a top-notch user experience and continuously enhancing the app with exciting new features.
 
-I created this site to test my full-stack web development abilities. Using a MERN stack (MongoDB, Express.js, React.js, Node.js), I have been able to use:
-Node.js for server-side development and used it to serve as the backend for my React-based web application
-Express.js framework to create a RESTful API and handle HTTP requests and routes
-MongoDB and mongoose to create models and schemas to create, read, update, and delete user data
-JWT to authenticate users and ensure data is exchanged safely between the front and back-end.
-Bcrypt to encrypt user passwords before storing them in the database
-Use a caching mechanism to optimize API calls and reduce repeated API requests
-If you have any suggestions, feedback, or would like to connect, please don't hesitate to reach out to me at sidhu.jason03@gmail.com
+## Technologies Used
+
+Premier League Hub is built with a variety of cutting-edge technologies, including:
+
+- **Node.js:** For server-side scripting.
+- **Express.js:** As the web application framework.
+- **React:** For building the user interface.
+- **MongoDB:** As the database system for storing data.
+- **JSON Web Tokens (JWT):** For secure user authentication.
+- **Bootstrap:** For responsive and stylish UI components.
+- **And More:** [List any additional technologies or libraries used.]
+
+## Getting Started
+Check out the website hosted using render here https://eplhub.onrender.com  
+
+
