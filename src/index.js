@@ -1,9 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM from 'react-dom';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { Helmet } from "react-helmet";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Standings from './Pages/standings';
 import Fantasy from './Pages/fantasy';
@@ -18,9 +17,12 @@ import Profile from './Pages/profile';
 import Favourite from './Pages/favourite';
 import { disableReactDevTools } from '@fvilers/disable-react-devtools';
 
-if(process.env.NODE_ENV === 'production') {disableReactDevTools()};
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+
+if (process.env.NODE_ENV === 'production') {
+  disableReactDevTools();
+}
+
+ReactDOM.render(
   <React.StrictMode>
   <header>
     <BSNavbar/>
@@ -34,12 +36,13 @@ root.render(
         <Route path="Pages/fantasy" element={<Fantasy />} />
         <Route path="Pages/favourite" element={<Favourite />} />
         <Route path="sign-in-options" element={<SignInOptionsPage />} />
-        <Route path="Pages/signin" element={<SignInPage/>} />
+        <Route path="Pages/signin" element={<SignInPage />} />
         <Route path="Pages/signup" element={<SignUpPage />} />
-        <Route path="profile" element={<Profile/>}/>
+        <Route path="profile" element={<Profile />} />
       </Routes>
     </Router>
-  </React.StrictMode>
+  </React.StrictMode>,
+  document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
