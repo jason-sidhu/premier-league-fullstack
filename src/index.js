@@ -1,5 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
@@ -16,7 +21,7 @@ import Stats from './Pages/stats';
 import Profile from './Pages/profile';
 import Favourite from './Pages/favourite';
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
   <header>
     <BSNavbar/>
