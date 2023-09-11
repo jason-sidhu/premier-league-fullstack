@@ -1,6 +1,6 @@
 # Premier League Hub
 
-Welcome to Premier League Hub, your go-to application for everything related to the English Premier League (EPL). This web app provides a comprehensive set of features for football enthusiasts, including live scores, standings, statistics, and fantasy football management.
+Welcome to Premier League Hub, your go-to application for everything related to the English Premier League (EPL). This web app provides a comprehensive set of features for football enthusiasts, results, upcoming fixtures, standings, statistics, fantasy premier league data, and specialized data for your favourite premier league team.
 
 ## Table of Contents
 
@@ -12,16 +12,23 @@ Welcome to Premier League Hub, your go-to application for everything related to 
 
 ## Features
 
-- **Live Scores:** Get real-time updates on EPL match scores and events.
-- **Standings:** View the latest league standings, including points, wins, losses, and goal differences.
-- **Statistics:** Access in-depth statistics on teams, players, and matches.
-- **Fantasy Football:** Manage your own fantasy football team, make transfers, and compete with other users.
-- **User Profiles:** Create and customize your user profile to keep track of your favorite teams and players.
-- **Authentication:** Secure user authentication using JWT (JSON Web Tokens).
+- **Scores:** See the most recent EPL match scores and upcoming fixtures. Look into the past to see results from previous seasons. 
+- **Standings:** View the latest league standings, including points, wins, losses, and goal differences. Take a look at previous season standings as well
+- **Statistics:** Access in-depth statistics premier league players, and filter them as you like.
+- **Fantasy Football:** Get ahead in FPL by getting access to useful fantasy premier league data
+- **User Profiles:** Create and customize your user profile to keep track of your favorite teams standings, results, matches and players.
+- **Authentication:** Secure user authentication using JWT (JSON Web Tokens) and Bcrypt.
 
-## About the Author
+## Upcoming Features
+EPL Hub is a work in progress and you can expect to see lots of upgrades and changes in the near future. TO name a few 
+- Pre-match statistics and lineups
+- Live match pages with in-game statistics and updates
+- A Fantasy Premier League game with a unique scoring system for a better fantasy experience
+- Live betting odds and predictions
 
-My name is Jason Sidhu and I am the developer behind Premier League Hub. As a passionate football fan and computer engineering student at the university of waterloo, I created this app to provide a one-stop platform for EPL enthusiasts. I'm committed to delivering a top-notch user experience and continuously enhancing the app with exciting new features.
+## About me
+
+My name is Jason Sidhu and I am the developer behind Premier League Hub. As a passionate football fan and computer engineering student at the University of Waterloo, I created this app to provide a one-stop platform for EPL enthusiasts. I'm committed to delivering a top-notch user experience and continuously enhancing the app with exciting new features.
 
 ## Technologies Used
 
@@ -30,10 +37,10 @@ Premier League Hub is built with a variety of cutting-edge technologies, includi
 - **Node.js:** For server-side scripting.
 - **Express.js:** As the web application framework.
 - **React:** For building the user interface.
-- **MongoDB:** As the database system for storing data.
+- **MongoDB and Mongoose:** As the database system for storing data.
 - **JSON Web Tokens (JWT):** For secure user authentication.
 - **Bootstrap:** For responsive and stylish UI components.
-- **And More:** [List any additional technologies or libraries used.]
+- **And More:** Bcrypt for password encryption,and using a caching mechanism to optimize API calls and reduce repeated API requests
 
 ## Getting Started
 Check out the website hosted using render here https://eplhub.onrender.com  
