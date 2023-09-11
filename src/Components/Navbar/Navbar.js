@@ -23,6 +23,7 @@ function BSNavbar() {
     localStorage.removeItem("userToken");
     setIsAuthenticated(false);
     navigate("/"); // Navigate to the home page after sign out
+    window.location.reload();
   };
 
   const handleSignOutClick = () => {
