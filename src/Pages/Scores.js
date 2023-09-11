@@ -33,7 +33,7 @@ function Scores() {
         setLoading(false);
       } else {
         // Else fetch with api and handle errors, also set the data in cache for next time
-        const response = await fetch(`http://localhost:8800/api/scores?season=${season}&matchday=${matchday}`);
+        const response = await fetch(`https://eplhub-api-jasonsidhu.onrender.com/api/scores?season=${season}&matchday=${matchday}`);
         if (response.status === 500) {
           setError("Too Many Requests. Please try again later.");
         } else {

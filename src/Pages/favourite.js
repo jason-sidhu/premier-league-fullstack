@@ -96,7 +96,7 @@ function Favourite() {
   //FETCH THE PLAYER STATS
   const fetchStatistics = async () => {
     try {
-      const response = await fetch(`http://localhost:8800/api/fantasy`);
+      const response = await fetch(`https://eplhub-api-jasonsidhu.onrender.com/api/fantasy`);
       if (response.status === 200) {
         const data = await response.json();
         setStats(data.elements);
@@ -115,7 +115,7 @@ function Favourite() {
   const fetchStandings = async (season) => {
     try {
       const response = await fetch(
-        `http://localhost:8800/api/standings?season=${season}`
+        `https://eplhub-api-jasonsidhu.onrender.com/api/standings?season=${season}`
       );
       if (!response.ok) {
         if (response.status === 500) {
@@ -143,7 +143,7 @@ function Favourite() {
   //FETCH THE USER DATA
   const fetchUserData = async () => {
     try {
-      const response = await fetch("http://localhost:8800/api/profile", {
+      const response = await fetch("https://eplhub-api-jasonsidhu.onrender.com/api/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -177,7 +177,7 @@ function Favourite() {
       } else {
         // Fetch with api and handle errors, also set the data in cache for next time
         const response = await fetch(
-          `http://localhost:8800/api/scores?season=${season}&matchday=${matchday}`
+          `https://eplhub-api-jasonsidhu.onrender.com/api/scores?season=${season}&matchday=${matchday}`
         );
         if (response.status === 500) {
           setError("Too Many Requests. Please try again later.");

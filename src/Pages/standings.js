@@ -29,7 +29,7 @@ function Standings() {
   //------------fetch standings if needed------------
   const fetchStandings = async (season) => {
     try {
-      const response = await fetch(`http://localhost:8800/api/standings?season=${season}`);
+      const response = await fetch(`https://eplhub-api-jasonsidhu.onrender.com/api/standings?season=${season}`);
       if(!response.ok){
         if(response.status === 500) {
           setError(

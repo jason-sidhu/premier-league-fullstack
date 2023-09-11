@@ -66,7 +66,7 @@ function Profile() {
 
   const fetchUserData = async () => {
     try {
-      const response = await fetch("http://localhost:8800/api/profile", {
+      const response = await fetch("https://eplhub-api-jasonsidhu.onrender.com/api/profile", {
         method: "GET",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("userToken")}`,
@@ -104,7 +104,7 @@ function Profile() {
 
     // Send HTTP request to update user information
     try {
-      const response = await fetch("http://localhost:8800/api/profile/update", {
+      const response = await fetch("https://eplhub-api-jasonsidhu.onrender.com/api/profile/update", {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +140,7 @@ function Profile() {
 
     // Send HTTP request to delete the user account
     try {
-      const response = await fetch("http://localhost:8800/api/profile/delete", {
+      const response = await fetch("https://eplhub-api-jasonsidhu.onrender.com/api/profile/delete", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",

@@ -49,7 +49,7 @@ function SignUpPage() {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:8800/api/signup", {
+      const response = await fetch("https://eplhub-api-jasonsidhu.onrender.com/api/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

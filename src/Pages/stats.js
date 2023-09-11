@@ -51,7 +51,7 @@ function Stats() {
 
   const fetchStatistics = async () => {
     try {
-      const response = await fetch(`http://localhost:8800/api/fantasy`);
+      const response = await fetch(`https://eplhub-api-jasonsidhu.onrender.com/api/fantasy`);
       if (response.status === 200){
         const data = await response.json();
         setStats(data.elements);

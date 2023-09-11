@@ -63,7 +63,7 @@ function Fantasy() {
 
   const fetchStatistics = async () => {
     try {
-      const response = await fetch(`http://localhost:8800/api/fantasy`);
+      const response = await fetch(`https://eplhub-api-jasonsidhu.onrender.com/api/fantasy`);
       if (response.status === 200) {
         const data = await response.json();
         // Format and store the player data, use spread syntax to clone each player object while overriding the cost property
