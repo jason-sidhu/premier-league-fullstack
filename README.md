@@ -1,70 +1,30 @@
-# Getting Started with Create React App
+AVAILABLE NOW:
+Premier League Hub provides you with up-to-date scores, fixtures, player statistics, standings, and data from your favorite team. The Fantasy section will help you manage your Fantasy Premier League team efficiently, providing valuable insights into key player performance attributes.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+You can filter your search to find results and standings from specific seasons and matchdays, and filter your fantasy or Premier League player statistics by a number of different attributes.
 
-## Available Scripts
+Once you have signed in, you can view data specific to your favorite team under the Favourite tab. See your favorite team's position, fixtures, and player statistics all in one place.
 
-In the project directory, you can run:
+COMING SOON:
+Premier League Hub is a work in progress and is working hard to bring you more features and a better user experience.
 
-### `yarn start`
+Upgrades will be made to the current APIs that are being used to offer a more tailored and enriched user experience. In particular, there is lots of focus on the development of a more personalized Fantasy Premier League page, and a new Fantasy Premier League game. Here is a preview of some of the things we want to bring soon:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Pre-match statistics and lineups
+Live match pages with in-game statistics and updates
+A Fantasy Premier League game with a unique scoring system for a better fantasy experience
+Live betting odds and predictions
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+ABOUT ME
+My name is Jason Sidhu, a computer engineering student at the University of Waterloo and the creator of Premier League Hub.
 
-### `yarn test`
+As a football fan, I wanted to create something that I felt passionate about while testing my skills in creating a full-stack web application. I wanted to create a platform that offers everything a Premier League fan could want in one place.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+I created this site to test my full-stack web development abilities. Using a MERN stack (MongoDB, Express.js, React.js, Node.js), I have been able to use:
+Node.js for server-side development and used it to serve as the backend for my React-based web application
+Express.js framework to create a RESTful API and handle HTTP requests and routes
+MongoDB and mongoose to create models and schemas to create, read, update, and delete user data
+JWT to authenticate users and ensure data is exchanged safely between the front and back-end.
+Bcrypt to encrypt user passwords before storing them in the database
+Use a caching mechanism to optimize API calls and reduce repeated API requests
+If you have any suggestions, feedback, or would like to connect, please don't hesitate to reach out to me at sidhu.jason03@gmail.com
