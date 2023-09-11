@@ -41,21 +41,21 @@ function BSNavbar() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/Pages/scores" className="nav-options">
+            <Nav.Link as={Link} to="/Pages/scores/" className="nav-options">
               Results
             </Nav.Link>
-            <Nav.Link as={Link} to="/Pages/standings" className="nav-options">
+            <Nav.Link as={Link} to="/Pages/standings/" className="nav-options">
               Standings
             </Nav.Link>
-            <Nav.Link as={Link} to="/Pages/stats" className="nav-options">
+            <Nav.Link as={Link} to="/Pages/stats/" className="nav-options">
               Statistics
             </Nav.Link>
-            <Nav.Link as={Link} to="/Pages/fantasy" className="nav-options">
+            <Nav.Link as={Link} to="/Pages/fantasy/" className="nav-options">
               Fantasy
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to={isAuthenticated ? "/Pages/favourite" : "/sign-in-options"}
+              to={isAuthenticated ? "/Pages/favourite/" : "/sign-in-options"}
               className="nav-options"
             >
               Favourite
@@ -64,14 +64,14 @@ function BSNavbar() {
           <Nav>
             <Nav.Link
               as={Link}
-              to={isAuthenticated ? "/profile" : "/sign-in-options"}
+              to={isAuthenticated ? "/profile/" : "/sign-in-options"}
               className="nav-options"
             >
               Profile
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to={isAuthenticated ? "/" : "/sign-in-options"}
+              to={isAuthenticated ? "/" : "/sign-in-options/"}
               onClick={isAuthenticated ? handleSignOutClick : null}
               className={
                 isAuthenticated ? "sign-out-animation nav-options" : "nav-options"
