@@ -34,10 +34,10 @@ function BSNavbar() {
       <Container>
         <Navbar.Brand className="nav-options" href="/">EPL Home</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link className="nav-options" to="/Pages/scores">Results</Nav.Link>
-          <Nav.Link className="nav-options" to="/Pages/standings">Standings</Nav.Link>
-          <Nav.Link className="nav-options" to="/Pages/stats">Statistics</Nav.Link>
-          <Nav.Link className="nav-options" to="/Pages/fantasy">Fantasy</Nav.Link>
+          <Nav.Link className="nav-options" href="/Pages/scores">Results</Nav.Link>
+          <Nav.Link className="nav-options" href="/Pages/standings">Standings</Nav.Link>
+          <Nav.Link className="nav-options" href="/Pages/stats">Statistics</Nav.Link>
+          <Nav.Link className="nav-options" href="/Pages/fantasy">Fantasy</Nav.Link>
           <Nav.Link className="nav-options" href={isAuthenticated ? "/Pages/favourite" : "/sign-in-options"}>Favourite</Nav.Link>
         </Nav>
         <Nav>

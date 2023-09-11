@@ -14,7 +14,7 @@ const app = express();
 dotenv.config();
 
 app.use(cors({
-  origin: 'https://eplhub-api-jasonsidhu.onrender.com',
+  origin: ['http://localhost:3000','https://eplhub-api-jasonsidhu.onrender.com']
 }));
 
 
