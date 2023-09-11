@@ -6,8 +6,8 @@ Welcome to Premier League Hub, your go-to application for everything related to 
 
 - [Features](#features)
 - [Upcoming Features](#upcoming-features)
-- [About the Author](#about-the-author)
 - [Technologies Used](#technologies-used)
+- [About the Author](#about-the-author)
 - [Getting Started](#getting-started)
 
 ## Features
@@ -26,10 +26,6 @@ EPL Hub is a work in progress and you can expect to see lots of upgrades and cha
 - A Fantasy Premier League game with a unique scoring system for a better fantasy experience
 - Live betting odds and predictions
 
-## About me
-
-My name is Jason Sidhu and I am the developer behind Premier League Hub. As a passionate football fan and computer engineering student at the University of Waterloo, I created this app to provide a one-stop platform for EPL enthusiasts. I'm committed to delivering a top-notch user experience and continuously enhancing the app with exciting new features.
-
 ## Technologies Used
 
 Premier League Hub is built with a variety of cutting-edge technologies, including:
@@ -41,6 +37,10 @@ Premier League Hub is built with a variety of cutting-edge technologies, includi
 - **JSON Web Tokens (JWT):** For secure user authentication.
 - **Bootstrap:** For responsive and stylish UI components.
 - **And More:** Bcrypt for password encryption,and using a caching mechanism to optimize API calls and reduce repeated API requests, middleware functions to handle tasks like JSON data parsing and Cross-Origin Resource Sharing (CORS), Axios to make HTTP requests to API endpoints for data, use of async functions and environment variables to follow best practices
+
+## About me
+
+My name is Jason Sidhu and I am the developer behind Premier League Hub. As a passionate football fan and computer engineering student at the University of Waterloo, I created this app to provide a one-stop platform for EPL enthusiasts. I'm committed to delivering a top-notch user experience and continuously enhancing the app with exciting new features.
 
 ## Getting Started
 Check out the website hosted using render here https://eplhub.onrender.com  
