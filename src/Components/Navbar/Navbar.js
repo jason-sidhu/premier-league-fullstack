@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link } from "react-router-dom";
-import "./Navbar.css"
+import { Link, useNavigate } from "react-router-dom"; // Use Link and useNavigate from react-router-dom
+import "./Navbar.css";
 
 function BSNavbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Track user authentication state to see if signed in or not, display accordingly 
+  const navigate = useNavigate(); // Get the navigate function from react-router-dom
 
   // Check if user is authenticated
   useEffect(() => {
@@ -21,6 +22,7 @@ function BSNavbar() {
     // Remove user token from local storage and update state
     localStorage.removeItem("userToken");
     setIsAuthenticated(false);
+    navigate("/"); // Navigate to the home page after sign out
   };
 
   const handleSignOutClick = () => {
@@ -31,25 +33,36 @@ function BSNavbar() {
   };
 
   return (
-  <Navbar className="nav" >
+    <Navbar className="nav">
       <Container>
-        <Navbar.Brand className="nav-options" href="/">EPL Home</Navbar.Brand>
+        <Link to="/" className="nav-options">EPL Home</Link> {/* Use Link instead of href */}
         <Nav className="me-auto">
-          <Nav.Link className="nav-options" href="Pages/scores">Results</Nav.Link>
-          <Nav.Link className="nav-options" href="/Pages/standings">Standings</Nav.Link>
-          <Nav.Link className="nav-options" href="/Pages/stats">Statistics</Nav.Link>
-          <Nav.Link className="nav-options" href="/Pages/fantasy">Fantasy</Nav.Link>
-          <Nav.Link className="nav-options" href={isAuthenticated ? "/Pages/favourite" : "/sign-in-options"}>Favourite</Nav.Link>
+          <Link to="/Pages/scores" className="nav-options">Results</Link> {/* Use Link instead of href */}
+          <Link to="/Pages/standings" className="nav-options">Standings</Link> {/* Use Link instead of href */}
+          <Link to="/Pages/stats" className="nav-options">Statistics</Link> {/* Use Link instead of href */}
+          <Link to="/Pages/fantasy" className="nav-options">Fantasy</Link> {/* Use Link instead of href */}
+          <Link
+            to={isAuthenticated ? "/Pages/favourite" : "/sign-in-options"}
+            className="nav-options"
+          >
+            Favourite
+          </Link>
         </Nav>
         <Nav>
-          <Nav.Link className="nav-options" href={isAuthenticated ? "/profile" : "/sign-in-options" }>Profile</Nav.Link>
-          <Nav.Link
-            href={isAuthenticated ? "/" : "/sign-in-options"}
+          <Link
+            to={isAuthenticated ? "/profile" : "/sign-in-options"}
+            className="nav-options"
+          >
+            Profile
+          </Link>
+          <span
             onClick={isAuthenticated ? handleSignOutClick : null}
-            className={isAuthenticated ? "sign-out-animation nav-options" : "nav-options"}
+            className={
+              isAuthenticated ? "sign-out-animation nav-options" : "nav-options"
+            }
           >
             {isAuthenticated ? "Sign Out" : "Sign In"}
-          </Nav.Link>
+          </span>
         </Nav>
       </Container>
     </Navbar>
