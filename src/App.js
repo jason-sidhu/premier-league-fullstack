@@ -15,7 +15,8 @@ import Favourite from './Pages/favourite';
 function App() {
     return (
 <Routes>
-        <Route path='/' element={<Home />} />
+        <Route path='/' > 
+        <Route index element={<Home />} />
         <Route path="Pages/scores" element={<Scores />} />
         <Route path="Pages/standings" element={<Standings />} />
         <Route path="Pages/stats" element={<Stats />} />
@@ -25,6 +26,7 @@ function App() {
         <Route path="Pages/signin" element={<SignInPage />} />
         <Route path="Pages/signup" element={<SignUpPage />} />
         <Route path="profile" element={<Profile />} />
+        </Route>
       </Routes>
 
 

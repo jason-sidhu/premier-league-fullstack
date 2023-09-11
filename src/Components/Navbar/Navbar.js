@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
+import { Link } from "react-router-dom";
 import "./Navbar.css"
 
 function BSNavbar() {
@@ -34,7 +35,7 @@ function BSNavbar() {
       <Container>
         <Navbar.Brand className="nav-options" href="/">EPL Home</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link className="nav-options" href="/Pages/scores">Results</Nav.Link>
+          <Nav.Link className="nav-options" href="Pages/scores">Results</Nav.Link>
           <Nav.Link className="nav-options" href="/Pages/standings">Standings</Nav.Link>
           <Nav.Link className="nav-options" href="/Pages/stats">Statistics</Nav.Link>
           <Nav.Link className="nav-options" href="/Pages/fantasy">Fantasy</Nav.Link>
