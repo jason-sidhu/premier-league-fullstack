@@ -34,7 +34,7 @@ function BSNavbar() {
       <Container>
         <Navbar.Brand className="nav-options" href="/">EPL Home</Navbar.Brand>
         <Nav className="me-auto">
-          <Nav.Link className="nav-options" href="/Pages/scores">Results</Nav.Link>
+          <Nav.Link className="nav-options" href="https://eplhub.onrender.com/Pages/scores">Results</Nav.Link>
           <Nav.Link className="nav-options" href="/Pages/standings">Standings</Nav.Link>
           <Nav.Link className="nav-options" href="/Pages/stats">Statistics</Nav.Link>
           <Nav.Link className="nav-options" href="/Pages/fantasy">Fantasy</Nav.Link>
