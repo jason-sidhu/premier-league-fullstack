@@ -33,37 +33,54 @@ function BSNavbar() {
   };
 
   return (
-    <Navbar className="nav">
+    <Navbar bg="dark" variant="dark" expand="lg" className="nav">
       <Container>
-        <Link to="/" className="nav-options">EPL Home</Link> {/* Use Link instead of href */}
-        <Nav className="me-auto">
-          <Link to="/Pages/scores" className="nav-options">Results</Link> {/* Use Link instead of href */}
-          <Link to="/Pages/standings" className="nav-options">Standings</Link> {/* Use Link instead of href */}
-          <Link to="/Pages/stats" className="nav-options">Statistics</Link> {/* Use Link instead of href */}
-          <Link to="/Pages/fantasy" className="nav-options">Fantasy</Link> {/* Use Link instead of href */}
-          <Link
-            to={isAuthenticated ? "/Pages/favourite" : "/sign-in-options"}
-            className="nav-options"
-          >
-            Favourite
-          </Link>
-        </Nav>
-        <Nav>
-          <Link
-            to={isAuthenticated ? "/profile" : "/sign-in-options"}
-            className="nav-options"
-          >
-            Profile
-          </Link>
-          <span
-            onClick={isAuthenticated ? handleSignOutClick : null}
-            className={
-              isAuthenticated ? "sign-out-animation nav-options" : "nav-options"
-            }
-          >
-            {isAuthenticated ? "Sign Out" : "Sign In"}
-          </span>
-        </Nav>
+        <Navbar.Brand as={Link} to="/" className="nav-options">
+          EPL Home
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link as={Link} to="/Pages/scores" className="nav-options">
+              Results
+            </Nav.Link>
+            <Nav.Link as={Link} to="/Pages/standings" className="nav-options">
+              Standings
+            </Nav.Link>
+            <Nav.Link as={Link} to="/Pages/stats" className="nav-options">
+              Statistics
+            </Nav.Link>
+            <Nav.Link as={Link} to="/Pages/fantasy" className="nav-options">
+              Fantasy
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to={isAuthenticated ? "/Pages/favourite" : "/sign-in-options"}
+              className="nav-options"
+            >
+              Favourite
+            </Nav.Link>
+          </Nav>
+          <Nav>
+            <Nav.Link
+              as={Link}
+              to={isAuthenticated ? "/profile" : "/sign-in-options"}
+              className="nav-options"
+            >
+              Profile
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to={isAuthenticated ? "/" : "/sign-in-options"}
+              onClick={isAuthenticated ? handleSignOutClick : null}
+              className={
+                isAuthenticated ? "sign-out-animation nav-options" : "nav-options"
+              }
+            >
+              {isAuthenticated ? "Sign Out" : "Sign In"}
+            </Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
       </Container>
     </Navbar>
   );
