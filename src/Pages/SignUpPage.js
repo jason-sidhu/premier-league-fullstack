@@ -124,7 +124,7 @@ function SignUpPage() {
             >
               <option value="">Select a team...</option>
               {Object.entries(premierLeagueTeams).map(([teamNumber, teamName]) => (
-              <option key={teamNumber} value={teamNumber}>
+              <option key={teamNumber} value={teamName}>
                 {teamName}
               </option>
               ))}
