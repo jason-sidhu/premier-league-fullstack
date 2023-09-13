@@ -107,7 +107,7 @@ function Home() {
   You can also find me on LinkedIn: <a href="https://www.linkedin.com/in/jason-sidhu/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
 
 <Card.Text>
-  Explore my GitHub repository: <a href="https://github.com/jason-sidhu/premier-league-fullstack" target="_blank" rel="noopener noreferrer">GitHub</a>
+  Explore the GitHub repository for this project: <a href="https://github.com/jason-sidhu/premier-league-fullstack" target="_blank" rel="noopener noreferrer">GitHub</a>
 </Card.Text>
 </Card.Text>
                 </Card.Text>
