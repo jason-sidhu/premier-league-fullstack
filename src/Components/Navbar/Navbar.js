@@ -34,7 +34,7 @@ function BSNavbar() {
   };
 
   return (
-    <Navbar bg="dark" variant="dark" expand="lg" className="nav">
+    <Navbar  expand="lg" className="nav">
       <Container>
         <Navbar.Brand as={Link} to="/" className="nav-options">
           EPL Home

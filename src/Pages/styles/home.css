@@ -1,13 +1,13 @@
 .home-page{
   background-color: white;
-  color: black;
+  color: white;
 }
 .home-page h1{
-  color: black;
+  color: white;
 }
 .jumbotron {
     padding: 8rem 1rem;
-    background-color: #e9ecef;
+    background-color: #141868;
     margin-bottom: 2rem;
   }
 
@@ -21,7 +21,7 @@
   padding: 20px;
   border: 1px solid #000000;
   border-radius: 8px;
-  background-color: #e9ecef; 
+  background-color: white; 
 }
 
 .custom-card-title{

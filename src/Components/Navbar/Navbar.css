@@ -1,6 +1,6 @@
 .nav{
     color: white;
-    background-color: #0d1117;
+    background-color: black;
     transition: color 0.3s, border-bottom-color 0.3s;
 }
 .nav-options{
