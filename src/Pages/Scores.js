@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, DropdownButton, Dropdown, Card, Row, Col, Button, ButtonGroup } from "react-bootstrap";
+import { Container, DropdownButton, Dropdown, Row, Col, ButtonGroup } from "react-bootstrap";
 import "./styles/scores.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -10,6 +10,16 @@ function Scores() {
   const [matches, setMatches] = useState([]); 
   const [loading, setLoading] = useState(true); 
   const [error, setError] = useState(null); 
+
+  // Current workaround to use cached data but update scores when a matchday is played
+  // Todo, find efficient way to limit api requests along with the current Caching, and upgrade/switch API endpoint for data retrieval
+  const currentMatchday = () => {
+    if ( (matchday === "5") && (season === "2023")) {
+      return true; 
+    } else {
+      return false; 
+    }
+  };
 
   // useEffect to do something after render and change to our dependency array [season, matchday] (fetch data)
   useEffect(() => {
@@ -25,7 +35,7 @@ function Scores() {
       setLoading(true);
       const cachedData = localStorage.getItem(`scores-${season}-${matchday}`); // "key" for a season/matchday data to check if in cache already
       
-      if (cachedData && (season !== 2023)) {
+      if (cachedData && !currentMatchday()) {
         // If cached, get the data and use it 
         const data = JSON.parse(cachedData);
         setMatches(data.matches);
