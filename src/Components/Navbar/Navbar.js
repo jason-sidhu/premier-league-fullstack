@@ -5,9 +5,12 @@ import Navbar from "react-bootstrap/Navbar";
 import { Link, useNavigate } from "react-router-dom"; // Use Link and useNavigate from react-router-dom
 import "./Navbar.css";
 
+ 
 function BSNavbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false); // Track user authentication state to see if signed in or not, display accordingly 
   const navigate = useNavigate(); // Get the navigate function from react-router-dom
+
+  
 
   // Check if user is authenticated
   useEffect(() => {
