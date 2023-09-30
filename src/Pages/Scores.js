@@ -14,7 +14,7 @@ function Scores() {
   // Current workaround to use cached data but update scores when a matchday is played
   // Todo, find efficient way to limit api requests along with the current Caching, and upgrade/switch API endpoint for data retrieval
   const currentMatchday = () => {
-    if ( (matchday === "39") && (season === "2023")) {
+    if ( (matchday === "7") && (season === "2023")) {
       return true; 
     } else {
       return false; 
